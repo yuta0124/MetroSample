@@ -19,12 +19,14 @@ class AppNavigationState(
     var currentTab: BottomNavKey by mutableStateOf(initialTab)
         private set
 
-    val currentBackStack: NavBackStack<NavKey> = when (currentTab) {
-        BottomNavKey.Screen1 -> tab1BackStack
-        BottomNavKey.Screen2 -> tab2BackStack
-    }
+    val currentBackStack: NavBackStack<NavKey>
+        get() = when (currentTab) {
+            BottomNavKey.Screen1 -> tab1BackStack
+            BottomNavKey.Screen2 -> tab2BackStack
+        }
 
-    val canHandleBackPress: Boolean = currentTab != BottomNavKey.Screen1 || tab1BackStack.size > 1
+    val canHandleBackPress: Boolean
+        get() = currentTab != BottomNavKey.Screen1 || tab1BackStack.size > 1
 
     fun selectTab(tab: BottomNavKey) {
         currentTab = tab

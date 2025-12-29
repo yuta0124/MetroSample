@@ -20,12 +20,12 @@ import com.example.metrosample.screen.component.ScaffoldTopAppBar
 
 fun EntryProviderScope<NavKey>.screen1(
     modifier: Modifier = Modifier,
-    navigationToScreen3: () -> Unit,
+    navigateToScreen3: () -> Unit,
 ) {
     entry(BottomNavKey.Screen1) {
         Screen1(
             modifier = modifier,
-            navigationToScreen3 = navigationToScreen3,
+            navigationToScreen3 = navigateToScreen3,
         )
     }
 }

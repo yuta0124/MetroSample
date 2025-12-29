@@ -87,7 +87,7 @@ private fun NavHost(
         ),
         entryProvider = entryProvider {
             screen1(
-                navigationToScreen3 = {
+                navigateToScreen3 = {
                     navigateTo(Screen3)
                 }
             )
@@ -97,7 +97,7 @@ private fun NavHost(
                 }
             )
             screen3(
-                onBackPreseed = {
+                onBackPressed = {
                     onBackPressed()
                 },
             )

@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 fun ScaffoldTopAppBar(
     title: String,
     modifier: Modifier = Modifier,
-    onBackPreseed: (() -> Unit)? = null,
+    onBackPressed: (() -> Unit)? = null,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     Scaffold(
@@ -26,8 +26,8 @@ fun ScaffoldTopAppBar(
             TopAppBar(
                 title = { Text(text = title) },
                 navigationIcon = {
-                    onBackPreseed?.let {
-                        IconButton(onClick = onBackPreseed) {
+                    onBackPressed?.let {
+                        IconButton(onClick = onBackPressed) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                 contentDescription = null,

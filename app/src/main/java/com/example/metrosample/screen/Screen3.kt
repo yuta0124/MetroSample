@@ -19,24 +19,24 @@ data object Screen3 : NavKey
 
 fun EntryProviderScope<NavKey>.screen3(
     modifier: Modifier = Modifier,
-    onBackPreseed: () -> Unit,
+    onBackPressed: () -> Unit,
 ) {
     entry(Screen3) {
         Screen3(
             modifier = modifier,
-            onBackPreseed = onBackPreseed,
+            onBackPressed = onBackPressed,
         )
     }
 }
 
 @Composable
 private fun Screen3(
-    onBackPreseed: () -> Unit,
+    onBackPressed: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     ScaffoldTopAppBar(
         title = "Screen3",
-        onBackPreseed = onBackPreseed,
+        onBackPressed = onBackPressed,
     ) { innerPadding ->
         Column(
             modifier = modifier.fillMaxSize().padding(innerPadding),

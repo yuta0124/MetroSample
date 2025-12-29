@@ -37,7 +37,7 @@ private fun Screen2(
 ) {
     ScaffoldTopAppBar(
         title = "Screen2",
-        onBackPreseed = null,
+        onBackPressed = null,
     ) { innerPadding ->
         Column(
             modifier = modifier.fillMaxSize().padding(innerPadding),

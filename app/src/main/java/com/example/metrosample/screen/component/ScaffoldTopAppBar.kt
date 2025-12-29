@@ -1,5 +1,6 @@
 package com.example.metrosample.screen.component
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -17,7 +18,7 @@ fun ScaffoldTopAppBar(
     title: String,
     modifier: Modifier = Modifier,
     onBackPreseed: (() -> Unit)? = null,
-    content: @Composable () -> Unit,
+    content: @Composable (PaddingValues) -> Unit,
 ) {
     Scaffold(
         modifier = modifier,
@@ -36,7 +37,7 @@ fun ScaffoldTopAppBar(
                 }
             )
         }
-    ) {
-        content()
+    ) { innerPadding ->
+        content(innerPadding)
     }
 }

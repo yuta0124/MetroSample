@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val appNavigationState: AppNavigationState = rememberAppNavigationState()
 
-            BackHandler(enabled = true) {
+            BackHandler(enabled = appNavigationState.canHandleBackPress) {
                 appNavigationState.handleBackPress()
             }
 

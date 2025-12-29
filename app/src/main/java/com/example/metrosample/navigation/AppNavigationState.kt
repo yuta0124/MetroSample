@@ -1,6 +1,7 @@
 package com.example.metrosample.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.retain.retain
@@ -18,11 +19,12 @@ class AppNavigationState(
     var currentTab: BottomNavKey by mutableStateOf(initialTab)
         private set
 
-    val currentBackStack: NavBackStack<NavKey>
-        get() = when (currentTab) {
-            BottomNavKey.Screen1 -> tab1BackStack
-            BottomNavKey.Screen2 -> tab2BackStack
-        }
+    val currentBackStack: NavBackStack<NavKey> = when (currentTab) {
+        BottomNavKey.Screen1 -> tab1BackStack
+        BottomNavKey.Screen2 -> tab2BackStack
+    }
+
+    val canHandleBackPress: Boolean = currentTab != BottomNavKey.Screen1 || tab1BackStack.size > 1
 
     fun selectTab(tab: BottomNavKey) {
         currentTab = tab

@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.metrosample"
-        minSdk = 24
+        minSdk = 28
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -75,5 +75,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.core)
 
     // metro
+    implementation(libs.metrox.android)
     implementation(libs.metrox.viewmodel)
+    implementation(libs.metrox.viewmodel.compose)
 }

@@ -22,13 +22,14 @@ import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
 import com.example.metrosample.bottomNavigation.BottomNavKey
 import com.example.metrosample.screen.component.ScaffoldTopAppBar
+import dev.zacsweers.metrox.viewmodel.metroViewModel
 
 fun EntryProviderScope<NavKey>.screen1(
     modifier: Modifier = Modifier,
     navigateToScreen3: () -> Unit,
 ) {
     entry(BottomNavKey.Screen1) {
-        val viewModel: Screen1ViewModel = Screen1ViewModel()
+        val viewModel: Screen1ViewModel = metroViewModel()
 
         Screen1(
             modifier = modifier,

@@ -4,11 +4,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.metrosample.repository.Repository
 import com.example.metrosample.repository.RepositoryImpl
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesIntoMap
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metrox.viewmodel.ViewModelKey
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+@Inject
+@ViewModelKey(Screen1ViewModel::class)
+@ContributesIntoMap(AppScope::class)
 class Screen1ViewModel : ViewModel() {
     // TODO: DI
     private val repository: Repository = RepositoryImpl()

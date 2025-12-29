@@ -46,7 +46,9 @@ private fun Screen3(
         onBackPressed = onBackPressed,
     ) { innerPadding ->
         Column(
-            modifier = modifier.fillMaxSize().padding(innerPadding),
+            modifier = modifier
+                .fillMaxSize()
+                .padding(innerPadding),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {

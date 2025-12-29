@@ -1,4 +1,4 @@
-package com.example.metrosample.screen
+package com.example.metrosample.screen.screen2
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,9 +10,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
 import com.example.metrosample.bottomNavigation.BottomNavKey
@@ -23,7 +25,10 @@ fun EntryProviderScope<NavKey>.screen2(
     navigateToScreen3: () -> Unit,
 ) {
     entry(BottomNavKey.Screen2) {
+        val viewModel: Screen2ViewModel = Screen2ViewModel()
+
         Screen2(
+            viewModel = viewModel,
             modifier = modifier,
             navigateToScreen3 = navigateToScreen3,
         )
@@ -32,11 +37,14 @@ fun EntryProviderScope<NavKey>.screen2(
 
 @Composable
 private fun Screen2(
+    viewModel: Screen2ViewModel,
     navigateToScreen3: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
     ScaffoldTopAppBar(
-        title = "Screen2",
+        title = uiState.title,
         onBackPressed = null,
     ) { innerPadding ->
         Column(
@@ -45,7 +53,7 @@ private fun Screen2(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = "Screen2",
+                text = uiState.title,
                 style = MaterialTheme.typography.titleMedium,
             )
             Spacer(modifier = Modifier.height(12.dp))

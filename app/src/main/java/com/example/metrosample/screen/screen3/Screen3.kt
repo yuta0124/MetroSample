@@ -1,4 +1,4 @@
-package com.example.metrosample.screen
+package com.example.metrosample.screen.screen3
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
 import com.example.metrosample.screen.component.ScaffoldTopAppBar
@@ -22,7 +24,9 @@ fun EntryProviderScope<NavKey>.screen3(
     onBackPressed: () -> Unit,
 ) {
     entry(Screen3) {
+        val viewModel: Screen3ViewModel = Screen3ViewModel()
         Screen3(
+            viewModel = viewModel,
             modifier = modifier,
             onBackPressed = onBackPressed,
         )
@@ -31,11 +35,14 @@ fun EntryProviderScope<NavKey>.screen3(
 
 @Composable
 private fun Screen3(
+    viewModel: Screen3ViewModel,
     onBackPressed: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
     ScaffoldTopAppBar(
-        title = "Screen3",
+        title = uiState.title,
         onBackPressed = onBackPressed,
     ) { innerPadding ->
         Column(
@@ -44,7 +51,7 @@ private fun Screen3(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = "Screen3",
+                text = uiState.title,
                 style = MaterialTheme.typography.titleMedium,
             )
         }

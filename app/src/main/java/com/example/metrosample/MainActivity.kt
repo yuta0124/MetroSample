@@ -19,10 +19,10 @@ import androidx.navigation3.ui.NavDisplay
 import com.example.metrosample.bottomNavigation.BottomNavigation
 import com.example.metrosample.navigation.AppNavigationState
 import com.example.metrosample.navigation.rememberAppNavigationState
-import com.example.metrosample.screen.Screen3
-import com.example.metrosample.screen.screen1
-import com.example.metrosample.screen.screen2
-import com.example.metrosample.screen.screen3
+import com.example.metrosample.screen.screen3.Screen3
+import com.example.metrosample.screen.screen1.screen1
+import com.example.metrosample.screen.screen2.screen2
+import com.example.metrosample.screen.screen3.screen3
 import com.example.metrosample.ui.theme.MetroSampleTheme
 
 class MainActivity : ComponentActivity() {

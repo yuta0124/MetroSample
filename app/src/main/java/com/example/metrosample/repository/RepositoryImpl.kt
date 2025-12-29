@@ -1,5 +1,8 @@
 package com.example.metrosample.repository
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+
 class RepositoryImpl : Repository {
     private val data = listOf(
         "data1",
@@ -8,5 +11,7 @@ class RepositoryImpl : Repository {
         "data4",
     )
 
-    override fun getData(): List<String> = data
+    override suspend fun getData(): List<String> = withContext(Dispatchers.IO) {
+        return@withContext data
+    }
 }

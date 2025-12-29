@@ -1,5 +1,5 @@
 package com.example.metrosample.repository
 
 interface Repository {
-    fun getData(): List<String>
+    suspend fun getData(): List<String>
 }

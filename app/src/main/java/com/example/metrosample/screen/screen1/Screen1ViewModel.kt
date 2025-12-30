@@ -3,7 +3,6 @@ package com.example.metrosample.screen.screen1
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.metrosample.repository.Repository
-import com.example.metrosample.repository.RepositoryImpl
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.Inject
@@ -16,10 +15,7 @@ import kotlinx.coroutines.launch
 @Inject
 @ViewModelKey(Screen1ViewModel::class)
 @ContributesIntoMap(AppScope::class)
-class Screen1ViewModel : ViewModel() {
-    // TODO: DI
-    private val repository: Repository = RepositoryImpl()
-
+class Screen1ViewModel(private val repository: Repository) : ViewModel() {
     val uiState: StateFlow<UiState>
         field = MutableStateFlow(UiState())
 

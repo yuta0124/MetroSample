@@ -26,9 +26,9 @@ import dev.zacsweers.metrox.viewmodel.metroViewModel
 
 fun EntryProviderScope<NavKey>.screen1(
     modifier: Modifier = Modifier,
-    navigateToScreen3: () -> Unit,
+    navigateToScreen3: (title: String) -> Unit,
 ) {
-    entry(BottomNavKey.Screen1) {
+    entry(BottomNavKey.Screen1NavKey) {
         val viewModel: Screen1ViewModel = metroViewModel()
 
         Screen1(
@@ -42,7 +42,7 @@ fun EntryProviderScope<NavKey>.screen1(
 @Composable
 private fun Screen1(
     viewModel: Screen1ViewModel,
-    navigateToScreen3: () -> Unit,
+    navigateToScreen3: (title: String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -55,17 +55,17 @@ private fun Screen1(
                 .padding(horizontal = 12.dp),
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            items(uiState.data) { item ->
+            items(uiState.data) { title ->
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(60.dp)
                         .border(width = 1.dp, color = Color.Black)
-                        .clickable { navigateToScreen3() },
+                        .clickable { navigateToScreen3(title) },
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Text(text = item)
+                    Text(text = title)
                 }
             }
         }

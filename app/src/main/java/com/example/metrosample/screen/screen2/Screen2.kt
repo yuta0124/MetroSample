@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,15 +22,13 @@ import dev.zacsweers.metrox.viewmodel.metroViewModel
 
 fun EntryProviderScope<NavKey>.screen2(
     modifier: Modifier = Modifier,
-    navigateToScreen3: () -> Unit,
 ) {
-    entry(BottomNavKey.Screen2) {
+    entry(BottomNavKey.Screen2NavKey) {
         val viewModel: Screen2ViewModel = metroViewModel()
 
         Screen2(
             viewModel = viewModel,
             modifier = modifier,
-            navigateToScreen3 = navigateToScreen3,
         )
     }
 }
@@ -39,7 +36,6 @@ fun EntryProviderScope<NavKey>.screen2(
 @Composable
 private fun Screen2(
     viewModel: Screen2ViewModel,
-    navigateToScreen3: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -60,9 +56,6 @@ private fun Screen2(
                 style = MaterialTheme.typography.titleMedium,
             )
             Spacer(modifier = Modifier.height(12.dp))
-            Button(onClick = navigateToScreen3) {
-                Text(text = "to Screen3")
-            }
         }
     }
 }

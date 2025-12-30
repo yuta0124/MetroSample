@@ -23,7 +23,7 @@ import com.example.metrosample.navigation.AppNavigationState
 import com.example.metrosample.navigation.rememberAppNavigationState
 import com.example.metrosample.screen.screen1.screen1
 import com.example.metrosample.screen.screen2.screen2
-import com.example.metrosample.screen.screen3.Screen3
+import com.example.metrosample.screen.screen3.Screen3NavKey
 import com.example.metrosample.screen.screen3.screen3
 import com.example.metrosample.ui.theme.MetroSampleTheme
 import dev.zacsweers.metro.AppScope
@@ -105,15 +105,11 @@ private fun NavHost(
         ),
         entryProvider = entryProvider {
             screen1(
-                navigateToScreen3 = {
-                    navigateTo(Screen3)
+                navigateToScreen3 = { title ->
+                    navigateTo(Screen3NavKey(title))
                 }
             )
-            screen2(
-                navigateToScreen3 = {
-                    navigateTo(Screen3)
-                }
-            )
+            screen2()
             screen3(
                 onBackPressed = {
                     onBackPressed()

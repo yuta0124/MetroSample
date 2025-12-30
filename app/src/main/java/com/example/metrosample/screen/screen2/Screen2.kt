@@ -19,13 +19,14 @@ import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
 import com.example.metrosample.bottomNavigation.BottomNavKey
 import com.example.metrosample.screen.component.ScaffoldTopAppBar
+import dev.zacsweers.metrox.viewmodel.metroViewModel
 
 fun EntryProviderScope<NavKey>.screen2(
     modifier: Modifier = Modifier,
     navigateToScreen3: () -> Unit,
 ) {
     entry(BottomNavKey.Screen2) {
-        val viewModel: Screen2ViewModel = Screen2ViewModel()
+        val viewModel: Screen2ViewModel = metroViewModel()
 
         Screen2(
             viewModel = viewModel,
@@ -48,7 +49,9 @@ private fun Screen2(
         onBackPressed = null,
     ) { innerPadding ->
         Column(
-            modifier = modifier.fillMaxSize().padding(innerPadding),
+            modifier = modifier
+                .fillMaxSize()
+                .padding(innerPadding),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {

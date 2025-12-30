@@ -12,21 +12,21 @@ sealed interface BottomNavKey: NavKey {
     val label: String
 
     @Serializable
-    data object Screen1: BottomNavKey {
+    data object Screen1NavKey: BottomNavKey {
         override val icon: ImageVector = Icons.Default.Home
         override val label: String = "Screen1"
     }
 
     @Serializable
-    data object Screen2: BottomNavKey {
+    data object Screen2NavKey: BottomNavKey {
         override val icon: ImageVector = Icons.Default.AccountCircle
         override val label: String = "Screen2"
     }
 
     companion object {
         val keys: List<BottomNavKey> = listOf(
-            Screen1,
-            Screen2,
+            Screen1NavKey,
+            Screen2NavKey,
         )
 
         /**
@@ -39,8 +39,8 @@ sealed interface BottomNavKey: NavKey {
         init {
             keys.forEach { value ->
                 when(value) {
-                    Screen1 -> Unit
-                    Screen2 -> Unit
+                    Screen1NavKey -> Unit
+                    Screen2NavKey -> Unit
                 }
             }
         }

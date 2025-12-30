@@ -23,8 +23,8 @@ import kotlinx.serialization.Serializable
 data class Screen3NavKey(val title: String) : NavKey
 
 fun EntryProviderScope<NavKey>.screen3(
-    modifier: Modifier = Modifier,
     onBackPressed: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     entry<Screen3NavKey> { args ->
         val viewModel: Screen3ViewModel = assistedMetroViewModel(
@@ -33,8 +33,8 @@ fun EntryProviderScope<NavKey>.screen3(
             }
         )
         Screen3(
-            viewModel = viewModel,
             modifier = modifier,
+            viewModel = viewModel,
             onBackPressed = onBackPressed,
         )
     }

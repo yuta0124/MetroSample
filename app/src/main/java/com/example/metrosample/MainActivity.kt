@@ -25,6 +25,8 @@ import com.example.metrosample.screen.screen1.screen1
 import com.example.metrosample.screen.screen2.screen2
 import com.example.metrosample.screen.screen3.Screen3NavKey
 import com.example.metrosample.screen.screen3.screen3
+import com.example.metrosample.screen.screen4.Screen4NavKey
+import com.example.metrosample.screen.screen4.screen4
 import com.example.metrosample.ui.theme.MetroSampleTheme
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
@@ -109,8 +111,17 @@ private fun NavHost(
                     navigateTo(Screen3NavKey(title))
                 }
             )
-            screen2()
+            screen2(
+                navigateToScreen4 = { title ->
+                    navigateTo(Screen4NavKey(title))
+                }
+            )
             screen3(
+                onBackPressed = {
+                    onBackPressed()
+                },
+            )
+            screen4(
                 onBackPressed = {
                     onBackPressed()
                 },

@@ -1,6 +1,5 @@
 package com.example.metrosample
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
@@ -12,6 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
@@ -28,18 +28,15 @@ import com.example.metrosample.screen.screen3.screen3
 import com.example.metrosample.screen.screen4.Screen4NavKey
 import com.example.metrosample.screen.screen4.screen4
 import com.example.metrosample.ui.theme.MetroSampleTheme
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.ContributesIntoMap
-import dev.zacsweers.metro.Inject
-import dev.zacsweers.metro.binding
-import dev.zacsweers.metrox.android.ActivityKey
 import dev.zacsweers.metrox.viewmodel.LocalMetroViewModelFactory
 import dev.zacsweers.metrox.viewmodel.MetroViewModelFactory
 
-@ContributesIntoMap(AppScope::class, binding<Activity>())
-@ActivityKey(MainActivity::class)
-@Inject
-class MainActivity(private val metroVmf: MetroViewModelFactory) : ComponentActivity() {
+class MainActivity : ComponentActivity() {
+    private val metroVmf: MetroViewModelFactory by lazy { viewModelFactory }
+
+    override val defaultViewModelProviderFactory: ViewModelProvider.Factory
+        get() = metroVmf
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

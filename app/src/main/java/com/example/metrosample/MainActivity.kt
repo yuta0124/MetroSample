@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
@@ -19,13 +21,22 @@ import androidx.navigation3.ui.NavDisplay
 import com.example.metrosample.bottomNavigation.BottomNavigation
 import com.example.metrosample.navigation.AppNavigationState
 import com.example.metrosample.navigation.rememberAppNavigationState
-import com.example.metrosample.screen.Screen3
-import com.example.metrosample.screen.screen1
-import com.example.metrosample.screen.screen2
-import com.example.metrosample.screen.screen3
+import com.example.metrosample.screen.screen1.screen1
+import com.example.metrosample.screen.screen2.screen2
+import com.example.metrosample.screen.screen3.Screen3NavKey
+import com.example.metrosample.screen.screen3.screen3
+import com.example.metrosample.screen.screen4.Screen4NavKey
+import com.example.metrosample.screen.screen4.screen4
 import com.example.metrosample.ui.theme.MetroSampleTheme
+import dev.zacsweers.metrox.viewmodel.LocalMetroViewModelFactory
+import dev.zacsweers.metrox.viewmodel.MetroViewModelFactory
 
 class MainActivity : ComponentActivity() {
+    private val metroVmf: MetroViewModelFactory by lazy { viewModelFactory }
+
+    override val defaultViewModelProviderFactory: ViewModelProvider.Factory
+        get() = metroVmf
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -37,7 +48,10 @@ class MainActivity : ComponentActivity() {
             }
 
             MetroSampleTheme {
-                App(navigationState = appNavigationState)
+                App(
+                    metroVmf = metroVmf,
+                    navigationState = appNavigationState,
+                )
             }
         }
     }
@@ -45,29 +59,32 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun App(
+    metroVmf: MetroViewModelFactory,
     navigationState: AppNavigationState,
     modifier: Modifier = Modifier,
 ) {
-    Scaffold(
-        modifier = modifier.fillMaxSize(),
-        bottomBar = {
-            BottomNavigation(
-                currentKey = navigationState.currentTab,
-                updateCurrentKey = { key ->
-                    navigationState.selectTab(key)
-                },
-                resetBackStack = { key ->
-                    navigationState.resetBackStack(key)
-                },
+    CompositionLocalProvider(LocalMetroViewModelFactory provides metroVmf) {
+        Scaffold(
+            modifier = modifier.fillMaxSize(),
+            bottomBar = {
+                BottomNavigation(
+                    currentKey = navigationState.currentTab,
+                    updateCurrentKey = { key ->
+                        navigationState.selectTab(key)
+                    },
+                    resetBackStack = { key ->
+                        navigationState.resetBackStack(key)
+                    },
+                )
+            }
+        ) { innerPadding ->
+            NavHost(
+                modifier = Modifier.padding(bottom = innerPadding.calculateBottomPadding()),
+                backStack = navigationState.currentBackStack,
+                navigateTo = navigationState::navigateTo,
+                onBackPressed = navigationState::handleBackPress,
             )
         }
-    ) { innerPadding ->
-        NavHost(
-            modifier = Modifier.padding(bottom = innerPadding.calculateBottomPadding()),
-            backStack = navigationState.currentBackStack,
-            navigateTo = navigationState::navigateTo,
-            onBackPressed = navigationState::handleBackPress,
-        )
     }
 }
 
@@ -87,16 +104,21 @@ private fun NavHost(
         ),
         entryProvider = entryProvider {
             screen1(
-                navigateToScreen3 = {
-                    navigateTo(Screen3)
+                navigateToScreen3 = { title ->
+                    navigateTo(Screen3NavKey(title))
                 }
             )
             screen2(
-                navigateToScreen3 = {
-                    navigateTo(Screen3)
+                navigateToScreen4 = { title ->
+                    navigateTo(Screen4NavKey(title))
                 }
             )
             screen3(
+                onBackPressed = {
+                    onBackPressed()
+                },
+            )
+            screen4(
                 onBackPressed = {
                     onBackPressed()
                 },

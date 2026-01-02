@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.jetbrains.kotlin.serialization)
+    alias(libs.plugins.metro)
 }
 
 android {
@@ -44,7 +45,10 @@ android {
     kotlin {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
-            freeCompilerArgs.add("-Xexplicit-backing-fields")
+            freeCompilerArgs.addAll(
+                "-Xexplicit-backing-fields",
+                "-XXLanguage:+ExplicitBackingFields",
+            )
         }
     }
 }
@@ -72,4 +76,8 @@ dependencies {
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)
     implementation(libs.kotlinx.serialization.core)
+
+    // metro
+    implementation(libs.metrox.viewmodel)
+    implementation(libs.metrox.viewmodel.compose)
 }
